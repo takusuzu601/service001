@@ -17,11 +17,11 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-    //追加 
-    'admin' => [
-        'driver'=>'eloquent',
-        'model'=>App\Models\Admin::class,
+    'admin'=>[
+       'driver'=>'eloquent',
+       'model'=>App\Models\Admin::class,
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ return [
     | users are actually retrieved out of your database or other storage
     | mechanisms used by this application to persist your user's data.
     |
-    | Supported: "session"
+    | Supported: "session", "token"
     |
     */
 
@@ -45,11 +45,17 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        // 追加
-        'admin'=>[
-            'driver'=>'session',
-            'proovider'=>'admins',
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
         ],
+        'admin'=>[
+           'driver'=>'session',
+           'provider'=>'admins',
+        ],
+
     ],
 
     /*
@@ -79,6 +85,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'admins'=>[
+           'driver'=>'eloquent',
+           'model'=>App\Models\Admin::class,
+        ],
+  
     ],
 
     /*
@@ -103,6 +114,11 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admins'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Admin::class,
+        ],
+
     ],
 
     /*

@@ -4,20 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Login</title>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="{{asset('bootstrap.min.css')}}">
 </head>
-<body>
+<body style="background-color: cornflowerblue">
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4" style="margin-top: 45px">
-                <h4>User Login</h4>
-                <form action="{{route('user.check')}}" method="post" autocomplete="off">
-                    @if (Session::get('fail'))
-                        <span>
-                            {{Session::get('fail')}}
-                        </span>
-                    @endif
+                <h4>Admin Login</h4>
+                <form action="{{route('admin.check')}}" method="post" autocomplete="off">
                     @csrf
                     <div class="form-group">
                         <label for="email">Email</label>

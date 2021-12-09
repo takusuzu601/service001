@@ -21,8 +21,8 @@
                 <th>Action</th>
             </tr>
             <tr>
-                <td>{{ Auth::user()->name }}</td>
-                <td>{{ Auth::user()->email }}</td>
+                <td>{{ Auth::guard('web')->user()->name }}</td>
+                <td>{{ Auth::guard('web')->user()->email }}</td>
                 <td>
                     <a href="{{ route('user.logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();">logout</a>

@@ -23,8 +23,13 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+
+                // adminのlogin後のリダイレクト先
+                return redirect()->route('admin.home');
                 //　従来記述コメントアウト
                 // return redirect(RouteServiceProvider::HOME);
+
+                //Userのlogin後のリダイレクト先
                 return redirect()->route('user.home');
             }
         }

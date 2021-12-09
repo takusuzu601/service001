@@ -43,7 +43,7 @@ class UserController extends Controller
         ]);
 
         $creds=$request->only('email','password');
-        if(Auth::attempt($creds)){
+        if(Auth::guard('web')->attempt($creds)){
             return redirect()->route('user.home');
             
         }else{
@@ -52,7 +52,7 @@ class UserController extends Controller
     }
 
     function logout(){
-        Auth::logout();
+        Auth::guard('web')->logout();
         return redirect('/');
     }
 }
