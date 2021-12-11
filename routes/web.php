@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Oner\OnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('user')->name('user.')->group(function () {
 
-    // PreventBackHistoryはミドルウェアでloguin処理後に戻るボタンでフォームに戻らないようにする
+    //PreventBackHistoryはミドルウェアで設定 戻るボタンとキャッシュを無効化
     Route::middleware(['guest:web', 'PreventBackHistory'])->group(function () {
         Route::view('/login', 'dashboard.user.login')->name('login');
         Route::view('/register', 'dashboard.user.register')->name('register');
@@ -45,11 +46,24 @@ Route::prefix('user')->name('user.')->group(function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    Route::middleware(['guest:admin'])->group(function () {
-        Route::view('/login','dashboard.admin.login')->name('login');
-        Route::post('check',[AdminController::class,'check'])->name('check');
+    Route::middleware(['guest:admin', 'PreventBackHistory'])->group(function () {
+        Route::view('/login', 'dashboard.admin.login')->name('login');
+        Route::post('check', [AdminController::class, 'check'])->name('check');
     });
-    Route::middleware(['auth:admin'])->group(function () {
-        Route::view('/','dashboard.admin.home')->name('home');
+    Route::middleware(['auth:admin', 'PreventBackHistory'])->group(function () {
+        Route::view('/home', 'dashboard.admin.home')->name('home');
+        Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    });
+});
+
+Route::prefix('oner')->name('oner.')->group(function () {
+
+    Route::middleware(['guest:oner', 'PreventBackHistory'])->group(function () {
+        Route::view('/login', 'dashboard.oner.login')->name('login');
+        Route::view('/register', 'dashboard.oner.register')->name('register');
+ 
+    });
+    Route::middleware(['auth:oner', 'PreventBackHistory'])->group(function () {
+        Route::view('/home', 'dashboard.oner.home')->name('home');
     });
 });
