@@ -17,9 +17,13 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-    'admin'=>[
-       'driver'=>'eloquent',
-       'model'=>App\Models\Admin::class,
+    'admin' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class,
+    ],
+    'oner' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Oner::class,
     ],
 
 
@@ -51,9 +55,13 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        'admin'=>[
-           'driver'=>'session',
-           'provider'=>'admins',
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'oner' => [
+            'driver' => 'session',
+            'provider' => 'oners',
         ],
 
     ],
@@ -85,11 +93,15 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-        'admins'=>[
-           'driver'=>'eloquent',
-           'model'=>App\Models\Admin::class,
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
-  
+        'oners' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Oner::class,
+        ],
+
     ],
 
     /*
@@ -114,9 +126,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'admins'=>[
-            'driver'=>'eloquent',
-            'model'=>App\Models\Admin::class,
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'oners' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Oner::class,
         ],
 
     ],

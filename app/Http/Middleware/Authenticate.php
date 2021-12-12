@@ -15,12 +15,19 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        // 認証されていないときにユーザーがリダイレクトされる場所を定義
+
         if (! $request->expectsJson()) {
 
             // if文を追加
             if($request->routeIs('admin.*')){
                 return route('admin.login');
             }
+
+            if($request->routeIs('oner.*')){
+                return route('oner.login');
+            }
+
             return route('user.login');
         }
     }

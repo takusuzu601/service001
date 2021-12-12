@@ -25,7 +25,13 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
 
                 // adminのlogin後のリダイレクト先
-                return redirect()->route('admin.home');
+                if ($guard === 'admin') {
+                    return redirect()->route('admin.home');
+                }
+                // onerのlogin後のリダイレクト先
+                if ($guard === 'oner') {
+                    return redirect()->route('oner.home');
+                }
                 //　従来記述コメントアウト
                 // return redirect(RouteServiceProvider::HOME);
 

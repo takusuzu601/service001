@@ -13,9 +13,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4" style="margin-top: 45px">
-                <h4>User Register</h4>
+                <h4>Oner Register</h4>
                 {{-- autocomplete="off" フォームの自動補完の無効化 --}}
-                <form action="{{ route('user.create') }}" method="post" autocomplete="off">
+                <form action="{{ route('oner.create') }}" method="post" autocomplete="off">
                     @if (Session::get('success'))
                         <div style="color:white;background-color: red;">
                             {{ Session::get('success') }}
@@ -40,28 +40,34 @@
                             <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Enter password"
-                                    value="{{ old('password') }}">
-                                <span class="text-danger">@error('password'){{ $message }}@enderror</span>
+                                <label for="oner_phone">Oner_phone</label>
+                                <input type="text" class="form-control" name="oner_phone" placeholder="Enter oner_phone"
+                                    value="{{ old('oner_phone') }}">
+                                <span class="text-danger">@error('oner_phone'){{ $message }}@enderror</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cpassword">Confirm Password</label>
-                                    <input type="password" class="form-control" name="cpassword"
-                                        placeholder="Enter Confirmpassword" value="{{ old('cpassword') }}">
-                                    <span class="text-danger">@error('cpassword'){{ $message }}@enderror</span>
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Enter password"
+                                        value="{{ old('password') }}">
+                                    <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">
-                                            Register
-                                        </button>
-                                    </div>
-                                    <br>
-                                    <a href="{{ route('user.login') }}">I rlready an account</a>
-                                </form>
+                                        <label for="cpassword">Confirm Password</label>
+                                        <input type="password" class="form-control" name="cpassword"
+                                            placeholder="Enter Confirmpassword" value="{{ old('cpassword') }}">
+                                        <span class="text-danger">@error('cpassword'){{ $message }}@enderror</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">
+                                                Register
+                                            </button>
+                                        </div>
+                                        <br>
+                                        <a href="{{ route('oner.login') }}">I rlready an account</a>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </body>
+                    </body>
 
-                </html>
+                    </html>
