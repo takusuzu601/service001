@@ -22,6 +22,7 @@ class Oner extends Authenticatable
         'oner_phone',
         'email',
         'password',
+        'email_verified'
     ];
 
     /**

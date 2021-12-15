@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Oner;
 
 use App\Http\Controllers\Controller;
 use App\Models\Oner;
+use App\Models\VerifyOner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class OnerController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:oners,email',
-            'oner_phone'=>'required',
+            'oner_phone' => 'required',
             'password' => 'required|min:5|max:30',
             'cpassword' => 'required|min:5|max:30|same:password'
         ]);
@@ -29,10 +30,56 @@ class OnerController extends Controller
         $oner->password = \Hash::make($request->password);
         $save = $oner->save();
 
+        // Email認証処理
+        $last_id = $oner->id;
+        $token = $last_id . hash('sha256', \Str::random(120));
+        $verifyURL = route('oner.verify', ['token' => $token, 'service' => 'Email_verification']);
+
+        VerifyOner::create([
+            'oner_id' => $last_id,
+            'token' => $token,
+        ]);
+
+        $message = 'Dear <b>' . $request->name . '<b>';
+        $message .= 'サインアップのためのタンクは、私たちはあなたのアカウントの設定を完了するためにあなたのメールアドレスを確認する必要があります';
+
+        $mail_data = [
+            'recipient' => $request->email,
+            'fromEmail' => $request->email,
+            'fromName' => $request->name,
+            'subject' => 'Email Verification',
+            'body' => $message,
+            'actionLink' => $verifyURL,
+
+        ];
+
+        \Mail::send('email-template', $mail_data, function ($message) use ($mail_data) {
+            $message->to($mail_data['recipient'])->from($mail_data['fromEmail'], $mail_data['fromName'])->subject($mail_data['subject']);
+        });
+
         if ($save) {
-            return redirect()->back()->with('success', '登録しました');
+            return redirect()->back()->with('success', 'あなたのアカウントを確認する必要があります 私たちはあなたにアクティベーションリンクを送信しましたあなたの電子メールをチェックしてください');
         } else {
             return redirect()->back()->with('fail', '登録に失敗しました');
+        }
+    }
+    // メール認証処理
+    public function verify(Request $request)
+    {
+        $token = $request->token;
+        $verifyOner = VerifyOner::where('token', $token)->first();
+        if (!is_null($verifyOner)) {
+            $oner = $verifyOner->oner;
+
+            if (!$oner->email_verified) {
+                $verifyOner->oner->email_verified = 1;
+                $verifyOner->oner->save();
+
+                return redirect()->route('oner.login')->with('info', 'メールアドレスが正常に確認されましたログインできるようになりました')
+                    ->with('verifiedEmail', $oner->email);
+            } else {
+                return redirect()->route('oner.login')->with('info', 'あなたのメールアドレスはすでに確認済みです。 これでログインできます')->with('verifiedEmail', $oner->email);
+            }
         }
     }
     // ログイン処理
