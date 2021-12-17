@@ -43,4 +43,15 @@ class Shop extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // 「１対多」の「多」
+    public function casts()
+    {
+        return $this->hasMany(Cast::class);
+    }
+    // 1対1
+    public function shopdescription()
+    {
+        return $this->hasOne(ShopDescription::class);
+    }
 }
