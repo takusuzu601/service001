@@ -11,17 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 </head>
 
-<body class="antialiased bg-gray-200">
+<body class="antialiased bg-red-100">
     
     <div
-        class="relative flex items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
         <div class="flex">
-            <h1 class="text-3xl text-red-500">Hello Tailwindsss</h1>
+    <h1 class="text-3xl text-green-500">Hello Tailwind</h1>
             @if (Route::has('user.login'))
                 <div class="hidden fixed top-0 left-0 px-6 py-4 sm:block">
                     @auth
