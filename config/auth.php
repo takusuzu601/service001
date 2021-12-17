@@ -21,9 +21,9 @@ return [
         'driver' => 'eloquent',
         'model' => App\Models\Admin::class,
     ],
-    'oner' => [
+    'shop' => [
         'driver' => 'eloquent',
-        'model' => App\Models\Oner::class,
+        'model' => App\Models\Shop::class,
     ],
 
 
@@ -59,9 +59,9 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'oner' => [
+        'shop' => [
             'driver' => 'session',
-            'provider' => 'oners',
+            'provider' => 'shops',
         ],
 
     ],
@@ -97,9 +97,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-        'oners' => [
+        'shops' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Oner::class,
+            'model' => App\Models\Shop::class,
         ],
 
     ],
@@ -130,9 +130,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-        'oners' => [
+        'shops' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Oner::class,
+            'model' => App\Models\Shop::class,
         ],
 
     ],

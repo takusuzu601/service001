@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <h1>Oner Dashboard</h1>
+        <h1>Shop Dashboard</h1>
         <hr>
         <table>
          
@@ -23,13 +23,13 @@
                 <th>Action</th>
             </tr>
             <tr>
-                <td>{{ Auth::guard('oner')->user()->name }}</td>
-                <td>{{ Auth::guard('oner')->user()->email }}</td>
-                <td>{{ Auth::guard('oner')->user()->phone_name }}</td>
+                <td>{{ Auth::guard('shop')->user()->name }}</td>
+                <td>{{ Auth::guard('shop')->user()->email }}</td>
+                <td>{{ Auth::guard('shop')->user()->phone_name }}</td>
                 <td>
-                    <a href="{{ route('oner.logout') }}"
+                    <a href="{{ route('shop.logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();">logout</a>
-                        <form id="logout-form" action="{{route('oner.logout')}}" method="post" style="display: none">@csrf</form>
+                        <form id="logout-form" action="{{route('shop.logout')}}" method="post" style="display: none">@csrf</form>
                 </td>
             </tr>
         </table>

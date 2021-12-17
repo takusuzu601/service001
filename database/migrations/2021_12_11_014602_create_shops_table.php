@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOnersTable extends Migration
+class CreateShopsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateOnersTable extends Migration
      */
     public function up()
     {
-        Schema::create('oners', function (Blueprint $table) {
+        Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('oner_phone');
+            $table->string('shop_phone');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -33,6 +33,6 @@ class CreateOnersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oners');
+        Schema::dropIfExists('shops');
     }
 }

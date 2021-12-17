@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VerifyOner extends Model
+class VerifyShop extends Model
 {
     use HasFactory;
 
-    public $table="verify_oners";
+    public $table="verify_shops";
 
     protected $fillable=[
-        'oner_id',
+        'shop_id',
         'token',
     ];
 
-    public function oner(){
-        return $this->belongsTo(Oner::class);
+    public function shop(){
+        return $this->belongsTo(Shop::class);
     }
 }

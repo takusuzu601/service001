@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Oner;
+namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
-use App\Models\Oner;
-use App\Models\VerifyOner;
+use App\Models\Shop;
+use App\Models\VerifyShop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class OnerController extends Controller
+class ShopController extends Controller
 {
     // 会員登録処理
     public function create(Request $request)
@@ -17,26 +17,26 @@ class OnerController extends Controller
         // Validate Input
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:oners,email',
-            'oner_phone' => 'required',
+            'email' => 'required|email|unique:shops,email',
+            'shop_phone' => 'required',
             'password' => 'required|min:5|max:30',
             'cpassword' => 'required|min:5|max:30|same:password'
         ]);
 
-        $oner = new Oner();
-        $oner->name = $request->name;
-        $oner->email = $request->email;
-        $oner->oner_phone = $request->oner_phone;
-        $oner->password = \Hash::make($request->password);
-        $save = $oner->save();
+        $shop = new Shop();
+        $shop->name = $request->name;
+        $shop->email = $request->email;
+        $shop->shop_phone = $request->shop_phone;
+        $shop->password = \Hash::make($request->password);
+        $save = $shop->save();
 
         // Email認証処理
-        $last_id = $oner->id;
+        $last_id = $shop->id;
         $token = $last_id . hash('sha256', \Str::random(120));
-        $verifyURL = route('oner.verify', ['token' => $token, 'service' => 'Email_verification']);
+        $verifyURL = route('shop.verify', ['token' => $token, 'service' => 'Email_verification']);
 
-        VerifyOner::create([
-            'oner_id' => $last_id,
+        VerifyShop::create([
+            'shop_id' => $last_id,
             'token' => $token,
         ]);
 
@@ -67,18 +67,18 @@ class OnerController extends Controller
     public function verify(Request $request)
     {
         $token = $request->token;
-        $verifyOner = VerifyOner::where('token', $token)->first();
-        if (!is_null($verifyOner)) {
-            $oner = $verifyOner->oner;
+        $verifyShop = VerifyShop::where('token', $token)->first();
+        if (!is_null($verifyShop)) {
+            $shop = $verifyShop->shop;
 
-            if (!$oner->email_verified) {
-                $verifyOner->oner->email_verified = 1;
-                $verifyOner->oner->save();
+            if (!$shop->email_verified) {
+                $verifyShop->shop->email_verified = 1;
+                $verifyShop->shop->save();
 
-                return redirect()->route('oner.login')->with('info', 'メールアドレスが正常に確認されましたログインできるようになりました')
-                    ->with('verifiedEmail', $oner->email);
+                return redirect()->route('shop.login')->with('info', 'メールアドレスが正常に確認されましたログインできるようになりました')
+                    ->with('verifiedEmail', $shop->email);
             } else {
-                return redirect()->route('oner.login')->with('info', 'あなたのメールアドレスはすでに確認済みです。 これでログインできます')->with('verifiedEmail', $oner->email);
+                return redirect()->route('shop.login')->with('info', 'あなたのメールアドレスはすでに確認済みです。 これでログインできます')->with('verifiedEmail', $shop->email);
             }
         }
     }
@@ -87,23 +87,23 @@ class OnerController extends Controller
     {
         // validate input
         $request->validate([
-            'email' => 'required|email|exists:oners,email',
+            'email' => 'required|email|exists:shops,email',
             'password' => 'required|min:5|max:30'
         ], [
             'email.exists' => 'このメールは存在しません'
         ]);
 
         $creds = $request->only('email', 'password');
-        if (Auth::guard('oner')->attempt($creds)) {
-            return redirect()->route('oner.home');
+        if (Auth::guard('shop')->attempt($creds)) {
+            return redirect()->route('shop.home');
         } else {
-            return redirect()->route('oner.login')->with('fail', 'password若しくはemailが違います。');
+            return redirect()->route('shop.login')->with('fail', 'password若しくはemailが違います。');
         }
     }
 
     function logout()
     {
-        Auth::guard('oner')->logout();
+        Auth::guard('shop')->logout();
         return redirect('/');
     }
 }

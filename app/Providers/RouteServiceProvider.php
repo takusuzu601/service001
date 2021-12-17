@@ -59,10 +59,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
 
-            // Oner　RouteFile
+            // Shop　RouteFile
             Route::middleware('web')
                 ->namespace($this->namespace)
-                ->group(base_path('routes/oner.php'));
+                ->group(base_path('routes/shop.php'));
         });
     }
 

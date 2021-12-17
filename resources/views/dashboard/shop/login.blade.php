@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Oner Login</title>
+    <title>Shop Login</title>
     <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
 </head>
 
@@ -13,8 +13,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4" style="margin-top: 45px">
-                <h4>Oner Login</h4>
-                <form action="{{ route('oner.check') }}" method="post" autocomplete="off">
+                <h4>Shop Login</h4>
+                <form action="{{ route('shop.check') }}" method="post" autocomplete="off">
                     @if (Session::get('fail'))
                         <span>
                             {{ Session::get('fail') }}
@@ -52,7 +52,7 @@
                         </button>
                     </div>
                     <br>
-                    <a href="{{ route('oner.register') }}">Create new Account</a>
+                    <a href="{{ route('shop.register') }}">Create new Account</a>
                 </form>
             </div>
         </div>

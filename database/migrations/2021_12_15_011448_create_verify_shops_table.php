@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVerifyOnersTable extends Migration
+class CreateVerifyShopsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateVerifyOnersTable extends Migration
      */
     public function up()
     {
-        Schema::create('verify_oners', function (Blueprint $table) {
-            $table->integer('oner_id');
+        Schema::create('verify_shops', function (Blueprint $table) {
+            $table->integer('shop_id');
             $table->string('token');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateVerifyOnersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verify_oners');
+        Schema::dropIfExists('verify_shops');
     }
 }
