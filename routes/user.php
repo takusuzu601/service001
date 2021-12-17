@@ -14,6 +14,8 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('/create', [UserController::class, 'create'])->name('create');
         // ログイン処理
         Route::post('/check', [UserController::class, 'check'])->name('check');
+          // メール認証処理
+        Route::get('/verify', [UserController::class, 'verify'])->name('verify');
     });
 
 

@@ -46,6 +46,23 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            // ルートの分割設定
+            // User　RouteFile
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/user.php'));
+
+
+            // Admin　RouteFile
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
+
+            // Oner　RouteFile
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/oner.php'));
         });
     }
 
