@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/', [App\Http\Controllers\SiteController::class, 'index'])->name('site_top');
+
+Route::get('/search', [App\Http\Controllers\SiteController::class, 'search'])->name('site_search');

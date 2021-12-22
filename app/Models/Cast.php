@@ -21,4 +21,14 @@ class Cast extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+    // １対 多
+    public function castimgs()
+    {
+        return $this->hasMany(CastImg::class);
+    }
+
+    // 多対多
+    public function types(){
+        return $this->belongsToMany(Type::class);
+    }
 }

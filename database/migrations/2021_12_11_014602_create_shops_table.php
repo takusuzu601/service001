@@ -20,6 +20,12 @@ class CreateShopsTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->unsignedBigInteger('pref_id')->nullable();
+            $table->foreign('pref_id')->references('id')->on('prefs');
+            $table->unsignedBigInteger('genre_id')->nullable();
+            $table->foreign('genre_id')->references('id')->on('genres');
+
             $table->string('email_verified')->default(0);
             $table->rememberToken();
             $table->timestamps();

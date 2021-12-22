@@ -49,9 +49,35 @@ class Shop extends Authenticatable
     {
         return $this->hasMany(Cast::class);
     }
+
+    public function prices()
+    {
+        return $this->hasMany(Price::class);
+    }
+
+    public function shopimgs()
+    {
+        return $this->hasMany(ShopImg::class);
+    }
     // 1対1
     public function shopdescription()
     {
         return $this->hasOne(ShopDescription::class);
+    }
+
+    // 1対1 逆
+    public function pref()
+    {
+        return $this->belongsTo(Pref::class);
+    }
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+    // 多対多
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
